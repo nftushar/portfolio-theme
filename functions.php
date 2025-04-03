@@ -38,7 +38,38 @@ function tagency_scripts() {
 }
 add_action('wp_enqueue_scripts', 'tagency_scripts');
 
+function enqueue_dashicons() {
+    wp_enqueue_style('dashicons');
+}
+add_action('wp_enqueue_scripts', 'enqueue_dashicons');
 
+// Register Skills post type
+function register_skills_post_type() {
+    register_post_type('skills', array(
+        'labels' => array(
+            'name' => __('Skills'),
+            'singular_name' => __('Skill'),
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'supports' => array('title', 'editor', 'thumbnail'),
+    ));
+}
+add_action('init', 'register_skills_post_type');
+
+// Register Testimonials post type
+function register_testimonials_post_type() {
+    register_post_type('testimonials', array(
+        'labels' => array(
+            'name' => __('Testimonials'),
+            'singular_name' => __('Testimonial'),
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'supports' => array('title', 'editor', 'thumbnail'),
+    ));
+}
+add_action('init', 'register_testimonials_post_type');
 
 // Customizer settings
 function tagency_customize_register($wp_customize) {

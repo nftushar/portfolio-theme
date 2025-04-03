@@ -1,16 +1,22 @@
-<section class="section__container stats__container">
-    <div class="stats__card">
-        <h4><?php echo get_theme_mod('clients_number', '80+'); ?></h4>
-        <p>Satisfied clients</p>
-    </div>
-    <div class="stats__divider"></div>
-    <div class="stats__card">
-        <h4><?php echo get_theme_mod('projects_number', '200+'); ?></h4>
-        <p>Project completed</p>
-    </div>
-    <div class="stats__divider"></div>
-    <div class="stats__card">
-        <h4><?php echo get_theme_mod('reviews_number', '99+'); ?></h4>
-        <p>Reviews given</p>
+<section id="stats">
+    <div class="stats__container">
+        <?php 
+        $stats = get_field('stats'); // Get the textarea field
+        if ($stats) :
+            $stats_lines = explode("\n", $stats); // Split by lines
+            foreach ($stats_lines as $line) :
+                list($stat_value, $stat_name) = array_map('trim', explode('|', $line)); // Split by "|"
+                if ($stat_value && $stat_name) : ?>
+                    <div class="stats__card">
+                        <h4><?php echo esc_html($stat_value); ?></h4>
+                        <p><?php echo esc_html($stat_name); ?></p>
+                    </div>
+                <?php endif;
+            endforeach;
+        else : ?>
+            <div class="stats__no-data">
+                <p>No stats available. Please add some in the WordPress admin.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
