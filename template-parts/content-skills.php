@@ -6,7 +6,7 @@
             // Fetching ACF field for skill section header
             $skills_subheader = get_field('skill_section_header', get_the_ID()); // Updated field name
             if (!$skills_subheader) {
-                echo "No skill section header"; // Fallback message
+                echo "xxNo skill section header"; // Fallback message
             } else {
                 echo esc_html($skills_subheader); // Display the skill section header
             }
@@ -30,7 +30,7 @@
         <p class="section__description">
             <?php
             $section_subtitle = get_field('skill_section_description', get_the_ID());
-            echo esc_html($section_subtitle ?: 'My commitment to quality, attention to detail.'); // Default fallback
+            echo esc_html($section_subtitle ?: 'sssss commitment to quality, attention to detail.'); // Default fallback
             ?>
         </p>
 

@@ -1,4 +1,13 @@
 <?php
+// Include ACF
+if (!function_exists('get_field')) {
+    // Check if ACF is installed as a plugin
+    if (!class_exists('ACF')) {
+        // If not, include ACF from theme
+        // require_once get_template_directory() . '/includes/acf/acf.php';
+    }
+}
+
 function tagency_theme_setup() {
     // Add theme support
     add_theme_support('title-tag');
