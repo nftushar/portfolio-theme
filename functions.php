@@ -6,7 +6,9 @@ if (!function_exists('get_field')) {
         // If not, include ACF from theme
         // require_once get_template_directory() . '/includes/acf/acf.php';
     }
-}
+} 
+
+
 
 function tagency_theme_setup() {
     // Add theme support
@@ -48,9 +50,11 @@ function tagency_scripts() {
 add_action('wp_enqueue_scripts', 'tagency_scripts');
 
 function enqueue_dashicons() {
-    wp_enqueue_style('dashicons');
+    wp_enqueue_style('dashicons', 'https://cdn.jsdelivr.net/npm/@icon/dashicons@0.9.0-alpha.4/dashicons.min.css');
 }
 add_action('wp_enqueue_scripts', 'enqueue_dashicons');
+
+
 
 // Register Skills post type
 function register_skills_post_type() {

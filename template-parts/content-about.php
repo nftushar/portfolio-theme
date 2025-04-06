@@ -41,8 +41,12 @@
                 // Display the button text for the link with translation support
                 echo esc_html(get_field('portfolio_btn_txt', get_the_ID()));
                 ?>
-                <span><i class="ri-arrow-right-up-line"></i></span>
+                <span>
+                    <i class="<?php echo get_field('btn_icon', get_the_ID()); ?>"></i>
+                </span>
             </a>
         </div>
+
+
     </div>
 </section>
