@@ -1,8 +1,14 @@
 <section class="section__container review__container" id="review">
-    <p class="section__subheader">Reviews</p>
+    <p class="section__subheader">
+        <?php echo esc_html(get_field('reviews_subheader', get_the_ID())); ?>
+    </p>
     <h2 class="section__header">
-        Our Customer Say Something <span>About Us</span>
+        <?php echo esc_html(get_field('reviews_title', get_the_ID())); ?>
+        <span>
+            <?php echo esc_html(get_field('reviews_subtitle', get_the_ID())); ?>
+        </span>
     </h2>
+
     <div class="swiper">
         <div class="swiper-wrapper">
             <?php
@@ -16,7 +22,7 @@
                     <div class="swiper-slide">
                         <div class="review__card">
                             <div class="review__ratings">
-                                <?php for($i = 0; $i < 5; $i++) {
+                                <?php for ($i = 0; $i < 5; $i++) {
                                     echo '<span><i class="ri-star-fill"></i></span>';
                                 } ?>
                             </div>
@@ -32,8 +38,9 @@
                             </div>
                         </div>
                     </div>
-                <?php endwhile;
-            endif; wp_reset_postdata();
+            <?php endwhile;
+            endif;
+            wp_reset_postdata();
             ?>
         </div>
     </div>

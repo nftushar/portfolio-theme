@@ -1,28 +1,31 @@
 <section class="portfolio__container" id="portfolio">
     <div class="portfolio__content">
         <?php 
-            // Retrieve values only once to reduce function calls
-            $portfolio_subheader = get_field('portfolio_subheader', get_the_ID());
-            $portfolio_title = get_field('portfolio_title', get_the_ID());
-            $portfolio_subtitle = get_field('portfolio_subtitle', get_the_ID());
-            $portfolio_btn_text = get_field('portfolio_btn_text', get_the_ID());
+            // Get the post ID only once
+            $post_id = get_the_ID();
 
-            // Fallback to theme mod if ACF field is empty
-            $about_description = esc_html(get_theme_mod('about_description', $portfolio_subheader));
-            $portfolio_title = esc_html(get_theme_mod('portfolio_title', $portfolio_title));
-            $portfolio_subtitle = esc_html(get_theme_mod('portfolio_subtitle', $portfolio_subtitle));
-            $portfolio_btn_text = esc_html(get_theme_mod('portfolio_btn_text', $portfolio_btn_text));
+            // Retrieve ACF fields
+            $portfolio_subheader = get_field('portfolio_subheader', $post_id);
+            $portfolio_title = get_field('portfolio_title', $post_id);
+            $portfolio_subtitle = get_field('portfolio_subtitle', $post_id);
+            $portfolio_btn_text = get_field('portfolio_btn_text', $post_id);
+
+            // Use get_theme_mod as fallback for ACF fields
+            $portfolio_subheader = $portfolio_subheader ?: get_theme_mod('portfolio_subheader', 'Default Subheader');
+            $portfolio_title = $portfolio_title ?: get_theme_mod('portfolio_title', 'Default Portfolio Title');
+            $portfolio_subtitle = $portfolio_subtitle ?: get_theme_mod('portfolio_subtitle', 'Default Portfolio Subtitle');
+            $portfolio_btn_text = $portfolio_btn_text ?: get_theme_mod('portfolio_btn_text', 'View Portfolio');
         ?>
 
-        <p class="section__subheader"><?php echo $about_description; ?></p>
+        <p class="section__subheader"><?php echo esc_html($portfolio_subheader); ?></p>
         <h2 class="section__header">
-            <?php echo $portfolio_title; ?>
-            <span><?php echo $portfolio_subtitle; ?></span>
+            <?php echo esc_html($portfolio_title); ?>
+            <span><?php echo esc_html($portfolio_subtitle); ?></span>
         </h2>
-        <p class="section__description"><?php echo $portfolio_subtitle; ?></p>
+        <p class="section__description"><?php echo esc_html($portfolio_subtitle); ?></p>
 
         <div class="portfolio__btn">
-            <button class="btn"><?php echo $portfolio_btn_text; ?></button>
+            <button class="btn"><?php echo esc_html($portfolio_btn_text); ?></button>
         </div>
     </div>
 
@@ -31,7 +34,7 @@
             <?php
             // Loop through portfolio images (1 to 5 fields)
             for ($i = 1; $i <= 5; $i++) {
-                $image = get_field('portfolio_image_' . $i, get_the_ID());
+                $image = get_field('portfolio_image_' . $i, $post_id);
 
                 // Check if the image exists, if so, display it
                 if ($image) {

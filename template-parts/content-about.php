@@ -2,13 +2,25 @@
     <div class="header__image">
         <?php if (get_theme_mod('about_image')): ?>
             <img src="<?php echo esc_url(get_theme_mod('about_image')); ?>" alt="header" />
-        <?php else: ?>
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/header.png" alt="header" />
+        <?php else:
+            // Get the home image field
+            $home_image = get_field('home_image', get_the_ID());
+
+            // Check if the field returns an image (array) and output the image URL
+            if ($home_image && is_array($home_image) && isset($home_image['url'])) {
+                $image_url = esc_url($home_image['url']);
+            } else {
+                // Fallback to default image
+                echo "<h1>Input Image</h1>";
+            }
+        ?>
+            <img src="<?php echo $image_url; ?>" alt="header" />
         <?php endif; ?>
     </div>
+
     <div class="header__content">
         <?php
-        // Get the ACF field value
+        // Get the ACF field value 
         $home_subheader = get_field('home_subheader', get_the_ID());
         ?>
 

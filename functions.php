@@ -9,6 +9,22 @@ if (!function_exists('get_field')) {
 } 
 
 
+function my_theme_acf_dynamic_color() {
+    // Get the secondary color from ACF (for options page or specific page)
+    $secondary_color = get_field('secondary_color', 'option'); // Use 'option' if it's a global option field
+    // If the color is set, inject it into the header
+    if ($secondary_color) {
+        echo '<style type="text/css">
+                :root {
+                    --secondary-color: ' . esc_attr($secondary_color) . ';
+                }
+              </style>';
+    }
+}
+add_action('wp_head', 'my_theme_acf_dynamic_color');
+
+
+
 
 function tagency_theme_setup() {
     // Add theme support
